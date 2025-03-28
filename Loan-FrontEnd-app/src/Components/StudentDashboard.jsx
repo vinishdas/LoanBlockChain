@@ -29,7 +29,7 @@ const StudentDashboard = () => {
       const [statusMessage,SetstausMessage] =  useState("");
 
       switch (res.data.status) {
-        case "student_apply":
+        case "student_apply":  
           SetstausMessage("Pending College Approval");
           break;
         case "college_verified":
