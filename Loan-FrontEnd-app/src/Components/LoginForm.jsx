@@ -18,7 +18,7 @@ const LoginForm = () => {
       // const response = await axios.post("http://localhost:5000/api/login", { email, password });
       // const { role } = response.data;
 
-      const role = "Bank"; // Hardcoded for now, replace with API response
+      const role = "College"; // Hardcoded for now, replace with API response
 
       // Navigate to the corresponding dashboard
       if (role === "Student") navigate("/student-dashboard");
