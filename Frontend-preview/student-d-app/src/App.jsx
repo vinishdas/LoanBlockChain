@@ -11,7 +11,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState("success"); // "success" or "error"
 
-  const studentAddress = "0x8EB8d8CE42742D481eA21a4f43B7Ba098BB95465"; // Hardcoded for now change
+  const studentAddress = "0xd84E1Ee2A977AcCFE2C0C12748a76AE084275724"; // Hardcoded for now change
 
   // 🔹 Show Tailwind Notification (Success or Error)
   const showMessage = (text, type = "success") => {
