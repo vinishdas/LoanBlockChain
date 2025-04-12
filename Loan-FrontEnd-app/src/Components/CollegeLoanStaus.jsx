@@ -2,19 +2,19 @@ const teamMembers = [
     {
       name: "Holden Caulfield",
       Usn: "4sf22cs056",
-      description: "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+      Year:2026,
       image: "https://dummyimage.com/200x200",
     },
     {
       name: "Alper Kamu",
-      role: "Designer",
-      description: "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+      Usn: "4sf22cs056",
+      Year:2026,
       image: "https://dummyimage.com/201x201",
     },
     {
       name: "Atticus Finch",
-      role: "UI Developer",
-      description: "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+      Usn: "4sf22cs056",
+      Year:2026,
       image: "https://dummyimage.com/204x204",
     },
   ];
@@ -39,7 +39,7 @@ const teamMembers = [
                   <div className="flex-grow sm:pl-8">
                     <h2 className="title-font font-medium text-lg text-gray-900">{member.name}</h2>
                     <h3 className="text-gray-500 mb-3">{member.Usn}</h3>
-                    <p className="mb-4">{member.description}</p>
+                    <p className="mb-4">{member.Year}</p>
                     <button className="w-[100px] border-2 rounded-lg   p-2 transition-all ease-in active:bg-[#2c9960] active:text-white active:rounded-xl">Confirm</button>
                   </div>
                 </div>

@@ -1,6 +1,8 @@
 import fincace from "../assets/undraw_finance_m6vw.svg"
 
 const HeroSection = (props) => {
+
+   
     return (
       <section className="text-gray-600 body-font m-20">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -14,7 +16,7 @@ const HeroSection = (props) => {
             EduFundChain uses blockchain to provide secure, transparent, and fast student loans, ensuring hassle-free approvals and fair terms.
             </p>
             <div className="flex justify-center">
-             {props.User =="Student" &&<button className="inline-flex text-white  bg-gradient-to-r from-[#11B5A3] to-[#028090] border-0 py-2 px-6 focus:outline-none hover:brightness-110 rounded text-lg">
+             {props.User =="Student" &&<button      className="inline-flex text-white  bg-gradient-to-r from-[#11B5A3] to-[#028090] border-0 py-2 px-6 focus:outline-none hover:brightness-110 rounded text-lg">
                 Apply Loan
               </button>}
              

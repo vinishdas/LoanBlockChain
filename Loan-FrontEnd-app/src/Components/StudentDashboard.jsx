@@ -8,10 +8,10 @@ import ClickSpark from "./ClickSpark/ClickSpark";
 import MagnetLines from "./MagnetLines/MagnetLines";
 import LoanCalculator from "./LoanCalculator";
 import { useState } from "react";
+import axios from "axios"; // ✅ Added missing axios import
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     navigate("/"); // Redirects to login
@@ -20,31 +20,37 @@ const StudentDashboard = () => {
   const [loanStatus, setLoanStatus] = useState(null);
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState("success");
+  const [statusMessage, setStatusMessage] = useState(""); // ✅ Corrected status message state
 
   const studentAddress = "0x8EB8d8CE42742D481eA21a4f43B7Ba098BB95465";
 
   const checkLoanStatus = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/get-loan-details?student=${studentAddress}`);
-      const [statusMessage,SetstausMessage] =  useState("");
+      const res = await axios.get(
+        `http://localhost:3001/get-loan-details?student=${studentAddress}`
+      );
 
+      // ✅ Fixed incorrect useState inside function
+      let newStatusMessage = "";
       switch (res.data.status) {
-        case "student_apply":  
-          SetstausMessage("Pending College Approval");
+        case "student_apply":
+          newStatusMessage = "Pending College Approval";
           break;
         case "college_verified":
-          SetstausMessage("Pending Bank Approval");
+          newStatusMessage = "Pending Bank Approval";
           break;
         case "loan_verified":
-          SetstausMessage("✅ Loan Approved!");
+          newStatusMessage = "✅ Loan Approved!";
           break;
         default:
-          SetstausMessage("Unknown Status");
+          newStatusMessage = "Unknown Status";
       }
+
+      setStatusMessage(newStatusMessage); // ✅ Updated correctly
 
       setLoanStatus({
         ...res.data,
-        statusMessage: statusMessage,
+        statusMessage: newStatusMessage, // ✅ Uses updated state correctly
       });
 
       showMessage("✅ Loan Status Updated!", "success");
@@ -63,35 +69,40 @@ const StudentDashboard = () => {
         sparkCount={8}
         duration={400}
       >
-        <HeroSection User="Student"></HeroSection>
+        <HeroSection User="Student" />
 
-
-        {!loanStatus && <button className="bg-[#02C39A] p-6 rounded-xl transition-all ease-in hover:shadow-lg hover:-translate-1.5  active:brightness-125  " onClick={checkLoanStatus}>Check Status</button> }
+        {!loanStatus && (
+          <button
+            className="bg-[#02C39A] p-6 rounded-xl transition-all ease-in hover:shadow-lg hover:-translate-1.5  active:brightness-125"
+            onClick={checkLoanStatus}
+          >
+            Check Status
+          </button>
+        )}
         {loanStatus && (
-        <div className="mt-5 bg-gray-800 p-6 rounded-lg shadow-lg w-96">
-          <h2 className="text-xl font-bold text-center">📜 Loan Details</h2>
-          <div className="mt-3 text-left">
-            <p className="border-b border-gray-700 py-1">
-              <b>Status:</b> <span className="text-yellow-400">{loanStatus.statusMessage}</span>
+          <div className="m-auto w-96 bg-gray-800 p-6 rounded-xl shadow-lg transition-all ease-in hover:shadow-xl hover:scale-105">
+          <h2 className="text-2xl font-bold text-center text-white mb-4">📜 Loan Details</h2>
+          <div className="space-y-3 text-gray-300">
+            <p className="border-b border-gray-700 pb-2">
+              <b className="text-white">Status:</b> <span className="text-yellow-400">{loanStatus.statusMessage}</span>
             </p>
-            <p className="border-b border-gray-700 py-1">
-              <b>Stream:</b> {loanStatus.course}
+            <p className="border-b border-gray-700 pb-2">
+              <b className="text-white">Stream:</b> {loanStatus.course}
             </p>
-            <p className="border-b border-gray-700 py-1">
-              <b>Bank:</b> {loanStatus.bank}
+            <p className="border-b border-gray-700 pb-2">
+              <b className="text-white">Bank:</b> {loanStatus.bank}
             </p>
-            <p className="border-b border-gray-700 py-1">
-              <b>Year Start:</b> {loanStatus.yr_start}
+            <p className="border-b border-gray-700 pb-2">
+              <b className="text-white">Year Start:</b> {loanStatus.yr_start}
             </p>
-            <p className="py-1">
-              <b>Year End:</b> {loanStatus.yr_end}
+            <p className="pb-2">
+              <b className="text-white">Year End:</b> {loanStatus.yr_end}
             </p>
           </div>
         </div>
-      )}
+        
+        )}
 
-
-      
         <div className="m-20">
           <MagnetLines
             rows={9}
@@ -105,11 +116,11 @@ const StudentDashboard = () => {
           />
         </div>
 
-        <div id="Loanform" className="mt-30 mb-30">
-          <LoanApplication></LoanApplication>
+        <div  id="Loanform" className="mt-30 mb-30">
+          <LoanApplication />
         </div>
         <div id="Loancal">
-          <LoanCalculator></LoanCalculator>
+          <LoanCalculator />
         </div>
       </ClickSpark>
     </>
